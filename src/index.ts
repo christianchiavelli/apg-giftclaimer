@@ -1,9 +1,9 @@
-const puppeteer = require("puppeteer");
-const fs = require("fs");
+import puppeteer, { Page } from "puppeteer";
+import fs from "fs";
 
-const { SECOND, Url, Selector, Credentials } = require("./constants");
+import { SECOND, Url, Selector, Credentials } from "./constants";
 
-async function login(page) {
+async function login(page: Page) {
   const hasSessionSaved = fs.existsSync("cookies.json");
 
   if (hasSessionSaved) {
@@ -49,11 +49,11 @@ async function start() {
 
   await login(page);
 
-  const links = await page.$$eval(Selector.CARDS_GAMES, (cards) => {
-    return Array.from(cards.map((el) => el.href));
+  const links: string[] = await page.$$eval(Selector.CARDS_GAMES, (cards) => {
+    return Array.from(cards.map((el: any) => el.href));
   });
 
-  for (link of links) {
+  for (let link of links) {
     await page.goto(link, { waitUntil: "networkidle2" });
 
     const hasButtonClaimGift = await page.$(Selector.BUTTON_CLAIM_GIFT);
@@ -63,7 +63,7 @@ async function start() {
 
     const isButtonClaimGiftDisable = await page.$eval(
       Selector.BUTTON_CLAIM_GIFT,
-      async (button) => {
+      (button: any): boolean => {
         return button.disabled;
       }
     );

@@ -1,14 +1,14 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const SECOND = 1000;
+export const SECOND = 1000;
 
-const Url = {
+export const Url = {
   HOME_PAGE: "https://gaming.amazon.com/home",
 };
 
-const Selector = {
+export const Selector = {
   BUTTON_CLAIM: "[title='Claim']",
   BUTTON_CLAIM_GIFT: "[data-a-target='buy-box_call-to-action']",
   CARDS_GAMES: "[data-a-target='learn-more-card']",
@@ -18,12 +18,7 @@ const Selector = {
   INPUT_PASSWORD: "#ap_password",
 };
 
-const Credentials = {
-  USER: process.env.PRIME_GAMING_USERNAME,
-  PASSWORD: process.env.PRIME_GAMING_PASSWORD,
+export const Credentials = {
+  USER: process.env.PRIME_GAMING_USERNAME ?? "",
+  PASSWORD: process.env.PRIME_GAMING_PASSWORD ?? "",
 };
-
-module.exports.SECOND = SECOND;
-module.exports.Url = Url;
-module.exports.Selector = Selector;
-module.exports.Credentials = Credentials;
