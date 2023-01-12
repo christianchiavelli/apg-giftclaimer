@@ -1,0 +1,22 @@
+{
+  "name": "apg-giftclaimer",
+  "version": "0.1.0",
+  "description": "Script for automatically claim game gifts on Amazon Prime",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "amazon-prime-gaming",
+    "puppeteer"
+  ],
+  "author": "christian.chiaveli@outlook.com",
+  "contributors": [
+    "christian.chiaveli@outlook.com"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "puppeteer": "^19.5.0"
+  }
+}
