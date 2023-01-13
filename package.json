@@ -1,7 +1,7 @@
 {
   "name": "apg-giftclaimer",
   "version": "0.1.0",
-  "description": "Script for automatically claim game gifts on Amazon Prime",
+  "description": "Script for automatically redeeming game gifts on Amazon Prime",
   "main": "src/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
