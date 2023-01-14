@@ -27,3 +27,9 @@ export const ConfigFiles = {
   COOKIES: "cookies.json",
   LAST_LINK: "lastLink.txt",
 };
+
+export const BrowserConfig = {
+  HEADLESS: ["true", "1"].includes(
+    process.env.BROWSER_HEADLESS?.toLowerCase() ?? ""
+  ),
+};

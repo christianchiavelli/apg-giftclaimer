@@ -1,7 +1,14 @@
 import puppeteer, { Page } from "puppeteer";
 import fs from "fs";
 
-import { SECOND, Url, Selector, Credentials, ConfigFiles } from "./constants";
+import {
+  SECOND,
+  Url,
+  Selector,
+  Credentials,
+  ConfigFiles,
+  BrowserConfig,
+} from "./constants";
 
 async function login(page: Page) {
   const hasSessionSaved = fs.existsSync(ConfigFiles.COOKIES);
@@ -41,7 +48,7 @@ async function login(page: Page) {
 
 async function start() {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: BrowserConfig.HEADLESS,
     defaultViewport: null,
     args: ["--start-maximized"],
   });
