@@ -22,3 +22,8 @@ export const Credentials = {
   USER: process.env.PRIME_GAMING_USERNAME ?? "",
   PASSWORD: process.env.PRIME_GAMING_PASSWORD ?? "",
 };
+
+export const ConfigFiles = {
+  COOKIES: "cookies.json",
+  LAST_LINK: "lastLink.txt",
+};

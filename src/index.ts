@@ -1,13 +1,13 @@
 import puppeteer, { Page } from "puppeteer";
 import fs from "fs";
 
-import { SECOND, Url, Selector, Credentials } from "./constants";
+import { SECOND, Url, Selector, Credentials, ConfigFiles } from "./constants";
 
 async function login(page: Page) {
-  const hasSessionSaved = fs.existsSync("cookies.json");
+  const hasSessionSaved = fs.existsSync(ConfigFiles.COOKIES);
 
   if (hasSessionSaved) {
-    const cookiesString = fs.readFileSync("cookies.json", "utf8");
+    const cookiesString = fs.readFileSync(ConfigFiles.COOKIES, "utf8");
     const parsedCookies = JSON.parse(cookiesString);
     await page.setCookie(...parsedCookies);
 
@@ -34,7 +34,7 @@ async function login(page: Page) {
 
   const cookies = await page.cookies();
 
-  fs.writeFileSync("./cookies.json", JSON.stringify(cookies, null, 2));
+  fs.writeFileSync(ConfigFiles.COOKIES, JSON.stringify(cookies, null, 2));
 
   return;
 }
@@ -55,7 +55,7 @@ async function start() {
     return [...uniqueLinks].reverse();
   });
 
-  const lastLink = fs.readFileSync("lastLink.txt", "utf-8");
+  const lastLink = fs.readFileSync(ConfigFiles.LAST_LINK, "utf-8");
   const lastLinkIndex = links.findIndex((link) => link === lastLink);
 
   links = links.slice(lastLinkIndex + 1);
@@ -76,14 +76,14 @@ async function start() {
     );
 
     if (isButtonClaimGiftDisable) {
-      fs.writeFileSync("lastLink.txt", link);
+      fs.writeFileSync(ConfigFiles.LAST_LINK, link);
       continue;
     }
 
     await page.click(Selector.BUTTON_CLAIM_GIFT, { delay: SECOND });
     await page.waitForNetworkIdle({ idleTime: SECOND });
 
-    fs.writeFileSync("lastLink.txt", link);
+    fs.writeFileSync(ConfigFiles.LAST_LINK, link);
   }
 
   await browser.close();
