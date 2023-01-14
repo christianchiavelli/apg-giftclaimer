@@ -2,37 +2,44 @@
 
 Script for automatically redeeming game gifts on Amazon Prime
 
-## Run Locally
+## Getting started
 
 Clone the project
 
 ```bash
-  git clone https://github.com/christianchiavelli/apg-giftclaimer.git
+git clone https://github.com/christianchiavelli/apg-giftclaimer.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd apg-giftclaimer
+cd apg-giftclaimer
+```
+
+Set node version [nvm](https://github.com/nvm-sh/nvm)
+
+```bash
+nvm install
+nvm use
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+npm install
 ```
 
-Start the server locally
+Set up environment variables
 
 ```bash
-  npm run dev
+cp .env.example .env
 ```
 
-## Tech Stack
+Run
 
-**Client:** Typescript
-
-**Server:** Node
+```bash
+npm run dev
+```
 
 ## Support
 
