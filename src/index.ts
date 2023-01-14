@@ -49,9 +49,16 @@ async function start() {
 
   await login(page);
 
-  const links: string[] = await page.$$eval(Selector.CARDS_GAMES, (cards) => {
-    return Array.from(cards.map((el: any) => el.href));
+  let links: string[] = await page.$$eval(Selector.CARDS_GAMES, (cards) => {
+    const uniqueLinks = new Set<string>();
+    cards.forEach((el: any) => uniqueLinks.add(el.href.split("?")[0]));
+    return [...uniqueLinks].reverse();
   });
+
+  const lastLink = fs.readFileSync("lastLink.txt", "utf-8");
+  const lastLinkIndex = links.findIndex((link) => link === lastLink);
+
+  links = links.slice(lastLinkIndex + 1);
 
   for (let link of links) {
     await page.goto(link, { waitUntil: "networkidle2" });
@@ -69,12 +76,17 @@ async function start() {
     );
 
     if (isButtonClaimGiftDisable) {
+      fs.writeFileSync("lastLink.txt", link);
       continue;
     }
 
     await page.click(Selector.BUTTON_CLAIM_GIFT, { delay: SECOND });
     await page.waitForNetworkIdle({ idleTime: SECOND });
+
+    fs.writeFileSync("lastLink.txt", link);
   }
+
+  await browser.close();
 }
 
 start();

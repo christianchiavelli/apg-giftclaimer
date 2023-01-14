@@ -131,3 +131,6 @@ dist
 
 # cookies
 cookies.json
+
+# persistance
+lastLink.txt
