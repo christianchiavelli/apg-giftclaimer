@@ -23,13 +23,13 @@ npm install
 
 ### Set up environment variables
 
-- Create a copy of .env.example file to .env.
+1. Create a copy of .env.example file to .env.
 
 ```bash
 cp .env.example .env
 ```
 
-- Open the .env file and add the following information:
+2. Open the .env file and add the following information:
 
 ```bash
 AMAZON_EMAIL=<Your Amazon email address>
